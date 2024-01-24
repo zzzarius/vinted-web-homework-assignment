@@ -1,1 +1,3 @@
-Assignment for hiring Web Engineers at Vinted
+# Take-home technical assignment for prospective Web Engineers at Vinted
+
+## Please read carefully the information provided 
