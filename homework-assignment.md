@@ -8,7 +8,7 @@ At Vinted, frontend developers take part in the design process, so they are know
 
 ## Assignment
 
-![animated](https://vinted-core-assets.s3.eu-central-1.amazonaws.com/frontend/hw-example-animated.gif)
+![animated](https://static-assets.vinted.com/frontend/hw-example-animated.gif)
 
 Based on the provided screenshots, make a simple `infinite-scroll` capable web application that allows for the user to browse items and favourite them.
 
