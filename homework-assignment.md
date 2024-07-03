@@ -11,7 +11,7 @@ At Vinted, frontend developers take part in the design process, so they are know
 Based on the provided screenshots, make a simple `infinite-scroll` capable web application that allows for the user to browse items and favourite them.
 
 ### Requirements
-* You are to use [Pexels API](https://www.pexels.com/api/) (recommended) or a similar API for data retrieval. If you choose another API, make sure it supports paginated results, unique images with some metadata and a way for us to access it.
+* You are to use [Pexels API](https://www.pexels.com/api/) (recommended) or a similar API for data retrieval. If you choose another API, make sure it supports paginated results, unique images with some metadata and a way for us to access it. Please include (in the repository) an API key so that we can test the app.
 * Design should be recreated as closely as possible, including item hover state.
 * Responsive design (with at least three breakpoints — Desktop, Tablet, Phone).
 * Infinite scroll - it's a concept where additional data is loaded when user scrolls down the screen.
