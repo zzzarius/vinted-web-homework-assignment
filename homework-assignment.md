@@ -1,5 +1,3 @@
-*Please make sure that all edits are reflected in publicly available copy here: https://gist.github.com/vintedEngineering/c838e906ecc25a52fe91c4a8a11e2916, Credentials can be found on 1pass (`Developers` vault) with namespace `GitHub vintedEngineering`.*
-
 # Frontend Homework Assignment
 
 ## Preface
@@ -13,7 +11,7 @@ At Vinted, frontend developers take part in the design process, so they are know
 Based on the provided screenshots, make a simple `infinite-scroll` capable web application that allows for the user to browse items and favourite them.
 
 ### Requirements
-* You are to use [Flickr API](https://www.flickr.com/services/api/flickr.photos.search.html) (recommended) or a similar API for data retrieval. If you choose another API, make sure it supports paginated results, unique images with some metadata and a way for us to access it.
+* You are to use [Pexels API](https://www.pexels.com/api/) (recommended) or a similar API for data retrieval. If you choose another API, make sure it supports paginated results, unique images with some metadata and a way for us to access it.
 * Design should be recreated as closely as possible, including item hover state.
 * Responsive design (with at least three breakpoints — Desktop, Tablet, Phone).
 * Infinite scroll - it's a concept where additional data is loaded when user scrolls down the screen.
@@ -33,7 +31,7 @@ Based on the provided screenshots, make a simple `infinite-scroll` capable web a
 * Please be mindful that the more you depend on copy-pasted code from the Internet, the harder it is for us to evaluate you objectively.
 * Make sure your project has everything needed for us to run and evaluate it on our machines.
 * Great developers use great tools. Don’t be afraid to show what development tools you use (CSS pre-processors, Javascript task-runners, testing libraries, etc.)
-* We won’t check for IE support, so we're saying a big **YES** to the usage of cutting-edge technologies available in modern browsers.
+* We're saying a big **YES** to the usage of cutting-edge technologies available in modern browsers.
 * We haven’t included a Photoshop, Sketch or any other design tool source file for a reason. We believe that pixel-perfect implementation can only be achieved by understanding the design process and not by reading specifications available in source files.
 * If you are not happy with your solution and don't have time to rework it, but still want to deliver on your commitment and send it to us, write down your ideas, better solutions, alternatives. We may take that into account when evaluating your work! :)
 
