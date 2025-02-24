@@ -1,11 +1,10 @@
+import { PEXELS_ENDPOINT, ITEMS_PER_PAGE } from "../constants";
 import { authorizedFetch } from "./authorizedFetch";
 import { PexelsResponse } from "./Pexels.types";
-
-const PEXELS_ENDPOINT = "https://api.pexels.com/v1/curated";
 
 export async function getCuratedPhotos(page: number = 1, init?: RequestInit) {
     const url = new URL(PEXELS_ENDPOINT);
     url.searchParams.append("page", page.toString());
-    url.searchParams.append("per_page", "40");
+    url.searchParams.append("per_page", ITEMS_PER_PAGE.toString());
     return authorizedFetch<PexelsResponse>(url.toString(), init);
 }
