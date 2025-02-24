@@ -27,11 +27,7 @@ const mockPhoto: Photo = {
 
 describe('Card', () => {
   beforeAll(() => {
-    // Mock HTMLDialogElement
-    class MockDialog {
-      showModal() {}
-      close() {}
-    }
+    // Mock HTMLDialogElement methods
     Object.defineProperty(HTMLDialogElement.prototype, 'showModal', {
       value: function() {},
       configurable: true

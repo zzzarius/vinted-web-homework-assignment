@@ -33,7 +33,12 @@ const createMockPhoto = (id: number) => ({
 
 const mockPhotosPage1 = {
   data: {
-    photos: [createMockPhoto(1), createMockPhoto(2)]
+    photos: [createMockPhoto(1), createMockPhoto(2)],
+    page: 1,
+    per_page: 2,
+    next_page: '2',
+    prev_page: '',
+    total_results: 4
   },
   errors: [],
   hasErrors: false
@@ -41,7 +46,12 @@ const mockPhotosPage1 = {
 
 const mockPhotosPage2 = {
   data: {
-    photos: [createMockPhoto(3), createMockPhoto(4)]
+    photos: [createMockPhoto(3), createMockPhoto(4)],
+    page: 2,
+    per_page: 2,
+    next_page: '',
+    prev_page: '1',
+    total_results: 4
   },
   errors: [],
   hasErrors: false

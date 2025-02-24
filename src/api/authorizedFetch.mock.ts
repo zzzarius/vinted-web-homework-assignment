@@ -1,4 +1,4 @@
-export const authorizedFetch = jest.fn().mockImplementation(async (url: string, init?: RequestInit) => {
+export const authorizedFetch = jest.fn().mockImplementation(async () => {
   return {
     ok: true,
     json: async () => ({ photos: [] })
