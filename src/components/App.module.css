@@ -1,0 +1,23 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  align-items: center;
+}
+
+.photoGrid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+@media screen and (min-width: 376px) {
+  .photoGrid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+}
+
