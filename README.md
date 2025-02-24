@@ -2,7 +2,7 @@
 
 ## Based on the technical requirements described in [homework-assignment.md](homework-assignment.md) file
 
-
+## [Live preview](https://vinted-web-homework-assignment-dardoneli.vercel.app)
 
 ## How to run project locally?
 
