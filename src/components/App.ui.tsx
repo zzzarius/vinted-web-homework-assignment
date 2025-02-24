@@ -91,7 +91,11 @@ function App() {
         })}
       </ul>
       {photos.length > 0 && <LoadingIndicator />}
-      <div style={{ display: !fetching ? "block" : "none" }} ref={bottomRef} />
+      <div
+        style={{ display: !fetching ? "block" : "none" }}
+        ref={bottomRef}
+        data-testid="scroll-bottom"
+      />
     </div>
   );
 }

@@ -19,7 +19,7 @@ export function usePageParam() {
     }
 
     function prevPage() {
-        setPage((prev) => prev > 0 ? prev - 1 : 1);
+        setPage((prev) => prev > 1 ? prev - 1 : 1);
     }
 
     return { page, nextPage, prevPage };

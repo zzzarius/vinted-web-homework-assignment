@@ -16,13 +16,13 @@ export function PreviewDialog({ isOpen, setIsOpen, photo }: PreviewDialogProps) 
         if (isOpen) {
             ref.current?.showModal();
         } else {
-            ref.current?.close();
+            ref.current?.close?.();
         }
     }, [isOpen]);
 
     function handleClose() {
         setIsOpen(false);
-        ref.current?.close();
+        ref.current?.close?.();
     }
 
     return (

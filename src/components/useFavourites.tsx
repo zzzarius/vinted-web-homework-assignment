@@ -12,7 +12,15 @@ export function useFavourites(): {
     }, []);
   
     useEffect(() => {
-      setFavourites(JSON.parse(localStorage.getItem("favourites") || "[]"));
+      try {
+        const stored = localStorage.getItem("favourites");
+        if (stored) {
+          setFavourites(JSON.parse(stored));
+        }
+      } catch (e) {
+        console.error('Error parsing favourites from localStorage:', e);
+        setFavourites([]);
+      }
     }, []);
   
     useEffect(() => {
