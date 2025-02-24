@@ -8,32 +8,40 @@ import { getCuratedPhotos } from '../api/Pexels.api';
 jest.mock('../api/Pexels.api');
 const mockGetCuratedPhotos = getCuratedPhotos as jest.MockedFunction<typeof getCuratedPhotos>;
 
-const mockPhotos = {
+const createMockPhoto = (id: number) => ({
+  id: id * 1000, // Use larger numbers for IDs to avoid conflicts
+  width: 800,
+  height: 600,
+  url: `https://example.com/photo${id}`,
+  photographer: 'John Doe',
+  photographer_url: `https://example.com/photographer${id}`,
+  photographer_id: id,
+  avg_color: '#FF0000',
+  src: {
+    original: `https://example.com/original${id}.jpg`,
+    large2x: `https://example.com/large2x${id}.jpg`,
+    large: `https://example.com/large${id}.jpg`,
+    medium: `https://example.com/medium${id}.jpg`,
+    small: `https://example.com/small${id}.jpg`,
+    portrait: `https://example.com/portrait${id}.jpg`,
+    landscape: `https://example.com/landscape${id}.jpg`,
+    tiny: `https://example.com/tiny${id}.jpg`,
+  },
+  liked: false,
+  alt: `Test photo ${id * 1000}` // Use the same ID in alt text
+});
+
+const mockPhotosPage1 = {
   data: {
-    photos: [
-      {
-        id: 12345,
-        width: 800,
-        height: 600,
-        url: 'https://example.com/photo1',
-        photographer: 'John Doe',
-        photographer_url: 'https://example.com/photographer1',
-        photographer_id: 123,
-        avg_color: '#FF0000',
-        src: {
-          original: 'https://example.com/original1.jpg',
-          large2x: 'https://example.com/large2x1.jpg',
-          large: 'https://example.com/large1.jpg',
-          medium: 'https://example.com/medium1.jpg',
-          small: 'https://example.com/small1.jpg',
-          portrait: 'https://example.com/portrait1.jpg',
-          landscape: 'https://example.com/landscape1.jpg',
-          tiny: 'https://example.com/tiny1.jpg',
-        },
-        liked: false,
-        alt: 'Test photo 1'
-      }
-    ]
+    photos: [createMockPhoto(1), createMockPhoto(2)]
+  },
+  errors: [],
+  hasErrors: false
+};
+
+const mockPhotosPage2 = {
+  data: {
+    photos: [createMockPhoto(3), createMockPhoto(4)]
   },
   errors: [],
   hasErrors: false
@@ -59,30 +67,30 @@ describe('App', () => {
   beforeEach(() => {
     mockGetCuratedPhotos.mockClear();
     window.localStorage.clear();
-    mockGetCuratedPhotos.mockResolvedValue(mockPhotos);
   });
 
   it('fetches and displays photos on initial load', async () => {
-    mockGetCuratedPhotos.mockResolvedValueOnce(mockPhotos);
+    mockGetCuratedPhotos.mockResolvedValueOnce(mockPhotosPage1);
     
-    render(<App />);
+    await act(async () => {
+      render(<App />);
+    });
     
     // Wait for loading indicator
-    await waitFor(() => {
-      expect(screen.getByText('Hold on... Getting more photos...')).toBeInTheDocument();
-    });
+    expect(screen.getByText('Hold on... Getting more photos...')).toBeInTheDocument();
     
     // Wait for API call
-    await waitFor(() => {
-      expect(mockGetCuratedPhotos).toHaveBeenCalledWith(1);
+    expect(mockGetCuratedPhotos).toHaveBeenCalledWith(1);
+
+    // Wait for photos to appear in the grid
+    await act(async () => {
+      await mockGetCuratedPhotos.mock.results[0].value;
     });
 
-    // Wait for photo to appear in the grid
-    await waitFor(() => {
-      const images = screen.getAllByAltText('Test photo 1');
-      const gridImage = images.find(img => !img.className);
-      expect(gridImage).toBeInTheDocument();
-    }, { timeout: 3000 });
+    const gridImage1 = screen.getAllByAltText('Test photo 1000')[0];
+    const gridImage2 = screen.getAllByAltText('Test photo 2000')[0];
+    expect(gridImage1).toBeInTheDocument();
+    expect(gridImage2).toBeInTheDocument();
   });
 
   it('handles API errors gracefully', async () => {
@@ -109,22 +117,29 @@ describe('App', () => {
   });
 
   it('loads more photos when scrolling to bottom', async () => {
+    // Mock the responses for both pages
+    mockGetCuratedPhotos
+      .mockResolvedValueOnce(mockPhotosPage1)
+      .mockResolvedValueOnce(mockPhotosPage2);
+
     await act(async () => {
       render(<App />);
     });
 
-    await waitFor(() => {
-      expect(mockGetCuratedPhotos).toHaveBeenCalledWith(1);
+    // Wait for the first API call to resolve
+    await act(async () => {
+      await mockGetCuratedPhotos.mock.results[0].value;
     });
 
-    // Wait for the initial render to complete
-    await waitFor(() => {
-      expect(screen.getByTestId('scroll-bottom')).toBeInTheDocument();
-    });
+    // Verify initial photos are loaded
+    const gridImage1 = screen.getAllByAltText('Test photo 1000')[0];
+    const gridImage2 = screen.getAllByAltText('Test photo 2000')[0];
+    expect(gridImage1).toBeInTheDocument();
+    expect(gridImage2).toBeInTheDocument();
 
     const bottomElement = screen.getByTestId('scroll-bottom');
 
-    // Simulate intersection
+    // Trigger intersection observer
     await act(async () => {
       intersectionObserverCallback([{
         isIntersecting: true,
@@ -132,8 +147,18 @@ describe('App', () => {
       }]);
     });
 
-    await waitFor(() => {
-      expect(mockGetCuratedPhotos).toHaveBeenCalledWith(2);
+    // Wait for the second API call
+    expect(mockGetCuratedPhotos).toHaveBeenCalledWith(2);
+
+    // Wait for the second API call to resolve
+    await act(async () => {
+      await mockGetCuratedPhotos.mock.results[1].value;
     });
+
+    // Verify new photos are loaded
+    const gridImage3 = screen.getAllByAltText('Test photo 3000')[0];
+    const gridImage4 = screen.getAllByAltText('Test photo 4000')[0];
+    expect(gridImage3).toBeInTheDocument();
+    expect(gridImage4).toBeInTheDocument();
   });
 });

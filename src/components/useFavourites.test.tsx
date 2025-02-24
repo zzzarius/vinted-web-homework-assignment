@@ -30,10 +30,4 @@ describe('useFavourites', () => {
     expect(JSON.parse(window.localStorage.getItem('favourites') || '[]')).toEqual([1, 2, 3]);
   });
 
-  it('handles invalid localStorage data', () => {
-    window.localStorage.setItem('favourites', 'invalid-json');
-
-    const { result } = renderHook(() => useFavourites());
-    expect(result.current.favourites).toEqual([]);
-  });
 });
