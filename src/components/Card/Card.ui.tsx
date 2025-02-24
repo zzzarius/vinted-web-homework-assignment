@@ -1,0 +1,65 @@
+import { Photo } from "../../api/Pexels.types";
+import { ITEMS_PER_PAGE } from "../../constants";
+import { clsx } from "../../utils";
+import { CardActions } from "./CardActions";
+import { CardDescription } from "./CardDescription";
+import styles from "./Card.module.css";
+import { PreviewDialog } from "./PreviewDialog";
+import { useState } from "react";
+
+interface CardProps {
+  photo: Photo
+  idx: number
+  isFavourite: boolean
+  setFavourites: React.Dispatch<React.SetStateAction<number[]>>
+}
+
+export function Card({
+  photo,
+  idx,
+  isFavourite,
+  setFavourites
+}: CardProps) {
+  const [previewIsOpen, setPreviewIsOpen] = useState<boolean>(false);
+
+  function handlePreviewOpen() {
+    setPreviewIsOpen(true);
+  }
+  return (
+    <li
+      key={photo.src.original}
+      className={clsx(
+        styles.card,
+        isFavourite && styles.favourite
+      )}
+      style={{ 
+        animationDelay: `${(idx % ITEMS_PER_PAGE) * 80}ms`,
+        ["--card-bg-color" as string]: photo.avg_color,
+      } as React.CSSProperties}
+    >
+      <figure className={styles.figure}>
+        <img
+          src={photo.src.large}
+          alt={photo.alt}
+          loading="lazy"
+          decoding="async"
+          fetchPriority="high"
+          srcSet={`${photo.src.large2x} 2x`}
+        />
+        <figcaption className={styles.figcaption}>
+          <CardDescription
+            alt={photo.alt}
+            photographer={photo.photographer}
+          />
+          <CardActions
+            setFavourites={setFavourites}
+            photoId={photo.id}
+            isFavourite={isFavourite}
+            handlePreviewOpen={handlePreviewOpen}
+          />
+        </figcaption>
+      </figure>
+      <PreviewDialog isOpen={previewIsOpen} setIsOpen={setPreviewIsOpen} photo={photo} />
+    </li>
+  )
+}
