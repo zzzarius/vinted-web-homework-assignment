@@ -71,14 +71,14 @@ describe('App', () => {
 
   it('fetches and displays photos on initial load', async () => {
     mockGetCuratedPhotos.mockResolvedValueOnce(mockPhotosPage1);
-    
+
     await act(async () => {
       render(<App />);
     });
-    
+
     // Wait for loading indicator
     expect(screen.getByText('Hold on... Getting more photos...')).toBeInTheDocument();
-    
+
     // Wait for API call
     expect(mockGetCuratedPhotos).toHaveBeenCalledWith(1);
 
@@ -102,7 +102,7 @@ describe('App', () => {
     mockGetCuratedPhotos.mockResolvedValueOnce(errorResponse);
 
     const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
-    
+
     await act(async () => {
       render(<App />);
     });

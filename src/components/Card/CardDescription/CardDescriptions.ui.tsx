@@ -8,9 +8,9 @@ interface CardDescriptionProps {
 export function CardDescription({ alt, photographer }: CardDescriptionProps) {
     return (
         <div className={styles.description}>
-        {alt && <p className={styles.caption}>{alt}</p>}
-        {alt && photographer && <hr />}
-        {photographer && <p className={styles.photographer}>{photographer}</p>}
-      </div>
+            {alt && <p className={styles.caption}>{alt}</p>}
+            {alt && photographer && <hr />}
+            {photographer && <p className={styles.photographer}>{photographer}</p>}
+        </div>
     )
 }

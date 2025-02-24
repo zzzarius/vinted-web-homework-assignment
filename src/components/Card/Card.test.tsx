@@ -1,5 +1,4 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { Card } from './Card.ui';
 import { Photo } from '../../api/Pexels.types';
 

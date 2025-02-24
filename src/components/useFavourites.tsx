@@ -6,11 +6,11 @@ export function useFavourites(): {
 } {
     const [favourites, setFavourites] = useState<number[]>([]);
     const [mounted, setMounted] = useState(false);
-  
+
     useEffect(() => {
       setMounted(true);
     }, []);
-  
+
     useEffect(() => {
       try {
         const stored = localStorage.getItem("favourites");
@@ -22,11 +22,11 @@ export function useFavourites(): {
         setFavourites([]);
       }
     }, []);
-  
+
     useEffect(() => {
       if (!mounted) return;
       localStorage.setItem("favourites", JSON.stringify(favourites));
     }, [favourites]);
-    
+
     return { favourites, setFavourites };
 }

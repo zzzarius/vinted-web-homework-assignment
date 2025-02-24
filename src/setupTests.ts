@@ -1,4 +1,5 @@
 declare global {
+  // eslint-disable-next-line no-var
   var importMeta: {
     meta: {
       env: {
@@ -20,6 +21,6 @@ if (typeof global.importMeta === 'undefined') {
 }
 
 // Make it available as import.meta.env
-(global as any).import = global.importMeta;
+(global as typeof globalThis & { importMeta: typeof importMeta }).importMeta = importMeta;
 
 export {};

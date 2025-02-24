@@ -4,7 +4,7 @@ import styles from "./PreviewDialog.module.css"
 import { Photo } from "../../../api/Pexels.types";
 
 interface PreviewDialogProps {
-    isOpen: Boolean
+    isOpen: boolean
     setIsOpen:  React.Dispatch<React.SetStateAction<boolean>>
     photo: Photo;
 }
