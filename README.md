@@ -30,3 +30,8 @@
 ```bash
   npm run test
 ```
+
+## How to build the project?
+
+- To build the project run `npm run build`. It will also check for Typescript issues.
+- Once it's built it can be previewed using `npm run preview` command.
