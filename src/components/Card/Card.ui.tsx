@@ -34,7 +34,7 @@ export function Card({
       )}
       style={{ 
         animationDelay: `${(idx % ITEMS_PER_PAGE) * 80}ms`,
-        ["--card-bg-color" as string]: photo.avg_color,
+        ["--color-card-bg" as string]: photo.avg_color,
       } as React.CSSProperties}
     >
       <figure className={styles.figure}>
