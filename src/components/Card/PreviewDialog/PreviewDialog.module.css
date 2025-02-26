@@ -20,6 +20,7 @@
     aspect-ratio: 1;
     border: none;
     border-radius: var(--radius-circle);
+    overflow: hidden;
 }
 
 .closeButton::after {
