@@ -6,26 +6,26 @@
     flex-direction: column;
     text-align: center;
     padding: 0;
-    gap: 0.25rem;
-    font-size: clamp(0.75rem, 2vw, 1rem);
+    gap: var(--space-xs);
+    font-size: clamp(var(--font-size-sm), 2vw, var(--font-size-md));
 }
 
 @media screen and (min-width: 376px) {
     .description {
-        padding: 0 2rem;
+        padding: 0 var(--space-xl);
         font-size: initial;
     }
 }
 
 .caption {
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: var(--font-size-lg);
 }
 
 
 @media screen and (min-width: 376px) {
     .caption {
-        margin-top: 4rem;
+        margin-top: var(--space-xxl);
     }
 }
 

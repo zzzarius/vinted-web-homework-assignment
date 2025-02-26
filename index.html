@@ -8,10 +8,52 @@
   <title>Picture gallery for Vinted</title>
   <style>
     :root {
-      --background-color: #E7E7E7;
       --link-color: #3D3333;
-      --light-color: #fff;
-      --card-bg-color: #3D3333;
+      --background-color: #E7E7E7;
+
+      /* Colors */
+      --color-white: #fff;
+      --color-black: #000;
+      --color-card-bg: #fff;
+      --color-text-light: var(--color-white);
+      --color-text-dark: #333;
+      --color-overlay-bg: rgba(0, 0, 0, 0.5);
+      --color-shadow: rgba(0, 0, 0, 0.2);
+
+      /* Spacing */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-xxl: 4rem;
+
+      /* Border radius */
+      --radius-sm: 0.5rem;
+      --radius-md: 0.8rem;
+      --radius-pill: 3rem;
+      --radius-circle: 100%;
+
+      /* Animations and transitions */
+      --transition-standard: 0.25s ease;
+      --transition-fast: 0.2s ease-in-out;
+      --animation-fade: fade-in 0.5s ease-in forwards;
+
+      /* Breakpoints */
+      --breakpoint-mobile: 376px;
+
+      /* Shadows */
+      --shadow-card: 1px 1px 3px 0 var(--color-shadow);
+
+      /* Font sizes */
+      --font-size-sm: 0.75rem;
+      --font-size-md: 1rem;
+      --font-size-lg: 1.1rem;
+      --font-size-xl: 2rem;
+
+      /* Component specific */
+      --card-aspect-ratio: 4/3;
+      --card-min-height: 300px;
 
       font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
       line-height: 1.5;
@@ -20,7 +62,7 @@
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      background-color: var(--background-color, #3D3333);
+      background-color: var(--background-color, #E7E7E7);
     }
 
     img {
@@ -43,15 +85,14 @@
       margin: 0;
     }
 
-    .pexels-link {
+    a {
       color: var(--link-color, #3D3333);
+    }
+
+    .pexels-link {
       text-align: right;
       display: block;
       padding: 0 3.8rem;
-    }
-
-    a {
-      color: var(--link-color, #3D3333);
     }
   </style>
 </head>
