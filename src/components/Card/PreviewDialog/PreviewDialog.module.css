@@ -39,5 +39,6 @@
     width: auto;
     object-fit: contain;
     object-position: top;
+    max-height: 90vh;
     max-width: 90vw;
 }
