@@ -49,7 +49,7 @@ function App() {
     }
 
     getData();
-  }, [page]);
+  }, [page, prevPage]);
 
   useEffect(() => {
     if (page < 1) {
@@ -72,7 +72,7 @@ function App() {
         observer.unobserve(bottomRef.current);
       }
     };
-  }, [page]);
+  }, [fetching, nextPage, page]);
 
   return (
     <div className={styles.app}>
