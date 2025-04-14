@@ -35,7 +35,7 @@ export function PreviewDialog({ photo, onClose }: PreviewDialogProps) {
   }
 
   return (
-    <dialog className={styles.previewDialog} ref={ref}>
+    <dialog className={styles.previewDialog} ref={ref} tabIndex={-1}>
       <div className={styles.controls}>
         <button
           type="button"

@@ -3,6 +3,7 @@
   border: none;
   overflow: hidden;
   background-color: transparent;
+  outline: none;
 }
 
 .previewDialog::backdrop {
