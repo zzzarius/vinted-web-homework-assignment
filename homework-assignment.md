@@ -8,14 +8,14 @@ At Vinted, frontend developers take part in the design process, so they are know
 
 ![animated](https://static-assets.vinted.com/frontend/hw-example-animated.gif)
 
-Based on the provided screenshots, make a simple `infinite-scroll` capable web application that allows for the user to browse items and favourite them.
+Based on the provided screenshots, make a simple `infinite-scroll` capable web application that allows for the user to browse items and favorites them.
 
 ### Requirements
 * You are to use [Pexels API](https://www.pexels.com/api/) (recommended) or a similar API for data retrieval. If you choose another API, make sure it supports paginated results, unique images with some metadata and a way for us to access it. Please include (in the repository) an API key so that we can test the app.
 * Design should be recreated as closely as possible, including item hover state.
 * Responsive design (with at least three breakpoints — Desktop, Tablet, Phone).
 * Infinite scroll - it's a concept where additional data is loaded when user scrolls down the screen.
-* A possibility to favourite an item (favourites should not be lost on page reload).
+* A possibility to favorites an item (favorites should not be lost on page reload).
 * Tests. We write a lot of tests and we'd love to see them. Don't get discouraged if you have no experience in writing tests, though. That's not a prerequisite to submit the homework assignment.
 * Static typing. We prefer TypeScript. However, that's only one non-crucial criteria and we'd rather see good JavaScript code than bad TypeScript code.
 * Sufficient documentation (instructions how to run the code and everything else that you'd see value in documenting in real world)

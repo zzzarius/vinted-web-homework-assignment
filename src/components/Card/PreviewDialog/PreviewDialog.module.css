@@ -1,44 +1,44 @@
 .previewDialog {
-    padding: 0;
-    border: none;
-    overflow: hidden;
-    background-color: transparent;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+  background-color: transparent;
 }
 
 .previewDialog::backdrop {
-    backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
 .controls {
-    position: absolute;
-    right: var(--space-md);
-    top: var(--space-md);
+  position: absolute;
+  right: var(--space-md);
+  top: var(--space-md);
 }
 
 .closeButton {
-    background-color: transparent;
-    aspect-ratio: 1;
-    border: none;
-    border-radius: var(--radius-circle);
-    overflow: hidden;
+  background-color: transparent;
+  aspect-ratio: 1;
+  border: none;
+  border-radius: var(--radius-circle);
+  overflow: hidden;
 }
 
 .closeButton::after {
-    position: absolute;
-    content: '❌';
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid var(--color-white);
-    border-radius: var(--radius-circle);
+  position: absolute;
+  content: "❌";
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-white);
+  border-radius: var(--radius-circle);
 }
 
 .image {
-    height: 100%;
-    width: auto;
-    object-fit: contain;
-    object-position: top;
-    max-height: 90vh;
-    max-width: 90vw;
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  object-position: top;
+  max-height: 90vh;
+  max-width: 90vw;
 }

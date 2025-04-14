@@ -1,38 +1,44 @@
 import styles from "./CardActions.module.css";
 
 interface CardActionsProps {
-    photoId: number;
-    isFavourite: boolean;
-    setFavourites: React.Dispatch<React.SetStateAction<number[]>>;
-    handlePreviewOpen: () => void;
+  photoId: number;
+  isFavorites: boolean;
+  setFavorites: React.Dispatch<React.SetStateAction<number[]>>;
+  handlePreviewOpen: () => void;
 }
 
-export function CardActions({ photoId, isFavourite, setFavourites, handlePreviewOpen }: CardActionsProps) {
-    function handleFavouriteClick(id: number) {
-        setFavourites(prev => {
-            if (prev.includes(id)) {
-                return prev.filter((num) => num !== id);
-            } else {
-                return [...prev, id];
-            }
-        });
-    }
+export function CardActions({
+  photoId,
+  isFavorites,
+  setFavorites,
+  handlePreviewOpen,
+}: CardActionsProps) {
+  function handleFavoritesClick(id: number) {
+    setFavorites((prev) => {
+      if (prev.includes(id)) {
+        return prev.filter((num) => num !== id);
+      }
+      return [...prev, id];
+    });
+  }
 
-    return (
-        <div className={styles.actions}>
-            <button
-                className={styles.btnFavorite}
-                onClick={() => handleFavouriteClick(photoId)}
-            >
-                {isFavourite ? "Unfavourite" : "Favourite"}
-            </button>
-            <button
-                className={styles.btnPreview}
-                onClick={handlePreviewOpen}
-                aria-label="Open preview"
-            >
-                🔍
-            </button>
-        </div>
-    )
+  return (
+    <div className={styles.actions}>
+      <button
+        type="button"
+        className={styles.btnFavorite}
+        onClick={() => handleFavoritesClick(photoId)}
+      >
+        {isFavorites ? "Unfavorite" : "Favourite"}
+      </button>
+      <button
+        type="button"
+        className={styles.btnPreview}
+        onClick={handlePreviewOpen}
+        aria-label="Open preview"
+      >
+        🔍
+      </button>
+    </div>
+  );
 }

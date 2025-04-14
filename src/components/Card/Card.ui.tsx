@@ -1,25 +1,20 @@
-import { Photo } from "../../api/Pexels.types";
+import { useState } from "react";
+import type { Photo } from "../../api/Pexels.types";
 import { ITEMS_PER_PAGE } from "../../constants";
 import { clsx } from "../../utils";
+import styles from "./Card.module.css";
 import { CardActions } from "./CardActions";
 import { CardDescription } from "./CardDescription";
-import styles from "./Card.module.css";
 import { PreviewDialog } from "./PreviewDialog";
-import { useState } from "react";
 
 interface CardProps {
-  photo: Photo
-  idx: number
-  isFavourite: boolean
-  setFavourites: React.Dispatch<React.SetStateAction<number[]>>
+  photo: Photo;
+  idx: number;
+  isFavorites: boolean;
+  setFavorites: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
-export function Card({
-  photo,
-  idx,
-  isFavourite,
-  setFavourites
-}: CardProps) {
+export function Card({ photo, idx, isFavorites, setFavorites }: CardProps) {
   const [previewIsOpen, setPreviewIsOpen] = useState<boolean>(false);
 
   function handlePreviewOpen() {
@@ -28,14 +23,13 @@ export function Card({
   return (
     <li
       key={photo.src.original}
-      className={clsx(
-        styles.card,
-        isFavourite && styles.favourite
-      )}
-      style={{ 
-        animationDelay: `${(idx % ITEMS_PER_PAGE) * 80}ms`,
-        ["--color-card-bg" as string]: photo.avg_color,
-      } as React.CSSProperties}
+      className={clsx(styles.card, isFavorites && styles.favorite)}
+      style={
+        {
+          animationDelay: `${(idx % ITEMS_PER_PAGE) * 80}ms`,
+          ["--color-card-bg" as string]: photo.avg_color,
+        } as React.CSSProperties
+      }
     >
       <figure className={styles.figure}>
         <img
@@ -45,19 +39,20 @@ export function Card({
           srcSet={`${photo.src.large2x} 2x`}
         />
         <figcaption className={styles.figcaption}>
-          <CardDescription
-            alt={photo.alt}
-            photographer={photo.photographer}
-          />
+          <CardDescription alt={photo.alt} photographer={photo.photographer} />
           <CardActions
-            setFavourites={setFavourites}
+            setFavorites={setFavorites}
             photoId={photo.id}
-            isFavourite={isFavourite}
+            isFavorites={isFavorites}
             handlePreviewOpen={handlePreviewOpen}
           />
         </figcaption>
       </figure>
-      <PreviewDialog isOpen={previewIsOpen} setIsOpen={setPreviewIsOpen} photo={photo} />
+      <PreviewDialog
+        isOpen={previewIsOpen}
+        setIsOpen={setPreviewIsOpen}
+        photo={photo}
+      />
     </li>
-  )
+  );
 }

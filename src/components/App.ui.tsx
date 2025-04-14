@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { getCuratedPhotos } from "../api/Pexels.api";
-import { Photo } from "../api/Pexels.types";
-import { LoadingIndicator } from "./LoadingIndicator";
+import type { Photo } from "../api/Pexels.types";
 import { Card } from "./Card/Card.ui";
-import { useFavourites } from "./useFavourites";
+import { LoadingIndicator } from "./LoadingIndicator";
+import { useFavorites } from "./useFavorites";
 import { usePageParam } from "./usePageParam";
 
 import styles from "./App.module.css";
@@ -12,7 +12,7 @@ function App() {
   const { page, nextPage, prevPage } = usePageParam();
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [errors, setErrors] = useState<unknown[]>([]);
-  const { favourites, setFavourites } = useFavourites();
+  const { favorites, setFavorites } = useFavorites();
 
   const [fetching, setFetching] = useState(false);
   const fetchedPages = useRef(new Set<number>(new Set([Number(page)])));
@@ -27,7 +27,7 @@ function App() {
 
   useEffect(() => {
     async function getData() {
-      if (fetchedPages.current.has(page) || page < 1) {
+      if (fetching || fetchedPages.current.has(page) || page < 1) {
         return;
       }
       setFetching(true);
@@ -41,7 +41,9 @@ function App() {
         return;
       }
       if (data?.photos) {
-        setPhotos(prev => [...prev, ...data.photos]);
+        setPhotos((prev) => {
+          return [...prev, ...data.photos];
+        });
         fetchedPages.current.add(page);
       }
       setFetching(false);
@@ -49,27 +51,29 @@ function App() {
     }
 
     getData();
-  }, [page, prevPage]);
+  }, [page, prevPage, fetching]);
 
   useEffect(() => {
     if (page < 1) {
       return;
     }
+
+    const currentBottomRef = bottomRef.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !fetching) {
           nextPage();
         }
       },
-      { threshold: 0.5, rootMargin: "100px" }
+      { threshold: 0.5, rootMargin: "100px" },
     );
-    if (bottomRef.current) {
-      observer.observe(bottomRef.current);
+    if (currentBottomRef) {
+      observer.observe(currentBottomRef);
     }
 
     return () => {
-      if (bottomRef.current) {
-        observer.unobserve(bottomRef.current);
+      if (currentBottomRef) {
+        observer.unobserve(currentBottomRef);
       }
     };
   }, [fetching, nextPage, page]);
@@ -78,24 +82,20 @@ function App() {
     <div className={styles.app}>
       <ul className={styles.photoGrid}>
         {photos.map((photo, idx) => {
-          const isFavourite = favourites.includes(photo.id);
+          const isFavorites = favorites.includes(photo.id);
           return (
             <Card
               key={photo.id}
               photo={photo}
               idx={idx}
-              isFavourite={isFavourite}
-              setFavourites={setFavourites}
+              isFavorites={isFavorites}
+              setFavorites={setFavorites}
             />
-          )
+          );
         })}
       </ul>
       {photos.length > 0 && <LoadingIndicator />}
-      <div
-        style={{ display: !fetching ? "block" : "none" }}
-        ref={bottomRef}
-        data-testid="scroll-bottom"
-      />
+      <div style={{ display: !fetching ? "block" : "none" }} ref={bottomRef} />
     </div>
   );
 }
