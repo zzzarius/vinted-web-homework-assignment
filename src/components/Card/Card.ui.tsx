@@ -41,8 +41,6 @@ export function Card({
         <img
           src={photo.src.large}
           alt={photo.alt}
-          loading="lazy"
-          decoding="async"
           fetchPriority="high"
           srcSet={`${photo.src.large2x} 2x`}
         />
