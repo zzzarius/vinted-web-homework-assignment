@@ -1,20 +1,20 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import type { Photo } from "../../../api/Pexels.types";
+import type { Photo } from "../../api/Pexels.types";
 import styles from "./PreviewDialog.module.css";
 
 interface PreviewDialogProps {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  photo: Photo;
+  photo: Photo | null;
+  onClose: () => void;
 }
 
-export function PreviewDialog({
-  isOpen,
-  setIsOpen,
-  photo,
-}: PreviewDialogProps) {
+export function PreviewDialog({ photo, onClose }: PreviewDialogProps) {
+  const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    setIsOpen(!!photo);
+  }, [photo]);
 
   useEffect(() => {
     if (isOpen) {
@@ -27,6 +27,11 @@ export function PreviewDialog({
   function handleClose() {
     setIsOpen(false);
     ref.current?.close?.();
+    onClose();
+  }
+
+  if (!photo) {
+    return null;
   }
 
   return (

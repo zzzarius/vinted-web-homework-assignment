@@ -40,5 +40,10 @@
         }
       }
     }
-  ]
+  ],
+  "css": {
+    "parser": {
+      "cssModules": true
+    }
+  }
 }

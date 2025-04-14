@@ -1,0 +1,76 @@
+.favoritesWrapper {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--color-text-light);
+  font-size: 18px;
+  border-radius: 2px;
+  padding: 0.5rem 1rem;
+}
+
+.downloadAll {
+  composes: btn;
+  background-color: var(--color-text-light);
+  color: var(--color-bg);
+}
+
+.clear {
+  composes: btn;
+  border: 1px solid var(--color-text-light);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .5rem;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.favoritesStrip {
+  padding: 1.5rem;
+  overflow-x: auto;
+  display: flex;
+  gap: var(--space-md);
+  overflow-x: auto;
+  scroll-padding: 0 1.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-text-light) transparent;
+}
+
+@media screen and (min-width: 376px) {
+  .favoritesStrip {
+    gap: var(--space-xl);
+  }
+}
+
+.title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-light);
+  margin: 0;
+}
+
+.buttons {
+  display: flex;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.expandButton,
+.collapseButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-light);
+  font-size: var(--font-size-lg);
+}

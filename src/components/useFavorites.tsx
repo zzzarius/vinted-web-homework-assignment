@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import type { Photo } from "../api/Pexels.types";
 
 export function useFavorites(): {
-  favorites: number[];
-  setFavorites: React.Dispatch<React.SetStateAction<number[]>>;
+  favorites: Photo[];
+  clearFavorites: () => void;
+  setFavorite: (photo: Photo) => void;
 } {
-  const [favorites, setFavorites] = useState<number[]>([]);
+  const [favorites, setFavorites] = useState<Photo[]>([]);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -28,5 +30,21 @@ export function useFavorites(): {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites, mounted]);
 
-  return { favorites, setFavorites };
+  const setFavorite = useCallback((photo: Photo) => {
+    setFavorites((prev) => {
+      const isFavorite = prev.some((fav) => fav.id === photo.id);
+      if (isFavorite) {
+        return prev.filter((fav) => fav.id !== photo.id);
+      }
+
+      return [...prev, photo];
+    });
+  }, []);
+
+  const clearFavorites = useCallback(() => {
+    setFavorites([]);
+    localStorage.removeItem("favorites");
+  }, []);
+
+  return { favorites, clearFavorites, setFavorite };
 }

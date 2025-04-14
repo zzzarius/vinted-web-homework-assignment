@@ -6,6 +6,7 @@
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-card);
   cursor: pointer;
+  min-width: 368px;
 }
 
 @media screen and (min-width: 376px) {
@@ -19,19 +20,22 @@
   }
 }
 
-.favorite::before {
-  content: "❤️";
-  font-size: var(--font-size-xl);
-  position: absolute;
-  top: var(--space-sm);
-  right: var(--space-md);
-}
-
 .figure {
-  width: 100%;
-  height: 100%;
   padding: 0;
   margin: 0;
+  flex: 1 1 100%;
+  width: 100%;
+}
+
+.button {
+  display: flex;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  border: none;
+  padding: 0;
 }
 
 .figcaption {
@@ -55,7 +59,11 @@
   }
 }
 
-.figure:is(:hover, :focus-within) > .figcaption {
+.button:focus {
+  outline: none;
+}
+
+.button:is(:hover, :focus-within) .figcaption {
   opacity: 1;
 }
 
@@ -67,4 +75,24 @@
   to {
     opacity: 1;
   }
+}
+
+.favoriteButton,
+.removeFavoriteButton {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: 26px;
+}
+
+.removeFavoriteButton {
+  color: var(--color-text-light);
+  font-size: 18px;
+  filter: grayscale(1);
+  background-color: white;
+  aspect-ratio: 1;
+  border-radius: 100%;
 }

@@ -16,11 +16,15 @@
 }
 
 .closeButton {
+  display: flex;
   background-color: transparent;
   aspect-ratio: 1;
   border: none;
   border-radius: var(--radius-circle);
   overflow: hidden;
+  border: 2px solid var(--color-white);
+  border-radius: var(--radius-circle);
+  width: 40px;
 }
 
 .closeButton::after {
@@ -30,8 +34,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--color-white);
-  border-radius: var(--radius-circle);
+  font-size: 16px;
 }
 
 .image {
@@ -41,4 +44,9 @@
   object-position: top;
   max-height: 90vh;
   max-width: 90vw;
+}
+
+:where(.closeButton):hover {
+  background-color: var(--color-text-light);
+  color: var(--color-black);
 }
