@@ -19,6 +19,7 @@ function App() {
   const [isDownloading, setIsDownloading] = useState(false);
   const { favorites, setFavorite, clearFavorites } = useFavorites();
   const [previewPhoto, setPreviewPhoto] = useState<Photo | null>(null);
+  const [showPreviewDialog, setShowPreviewDialog] = useState(false);
   const [fetching, setFetching] = useState(false);
   const fetchedPages = useRef(new Set<number>(new Set([Number(page)])));
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -136,6 +137,17 @@ function App() {
     };
   }, [previewPhoto, photos, nextPage]);
 
+  function handlePreviewClick(photo: Photo) {
+    return () => {
+      setPreviewPhoto(photo);
+      setShowPreviewDialog(true);
+    };
+  }
+
+  function handlePreviewClose() {
+    setShowPreviewDialog(false);
+  }
+
   return (
     <div className={styles.app}>
       <ul className={styles.photoGrid}>
@@ -148,7 +160,7 @@ function App() {
               idx={idx}
               isFavorite={isFavorite}
               setFavorite={setFavorite}
-              onPreviewClick={() => setPreviewPhoto(photo)}
+              onPreviewClick={handlePreviewClick(photo)}
             />
           );
         })}
@@ -170,7 +182,7 @@ function App() {
                 idx={idx}
                 isFavorite={isFavorites}
                 setFavorite={setFavorite}
-                onPreviewClick={() => setPreviewPhoto(photo)}
+                onPreviewClick={handlePreviewClick(photo)}
               />
             );
           })}
@@ -180,7 +192,8 @@ function App() {
       <div style={{ display: !fetching ? "block" : "none" }} ref={bottomRef} />
       <PreviewDialog
         photo={previewPhoto}
-        onClose={() => setPreviewPhoto(null)}
+        show={showPreviewDialog}
+        onClose={handlePreviewClose}
       />
     </div>
   );

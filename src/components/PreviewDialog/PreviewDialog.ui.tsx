@@ -4,34 +4,25 @@ import type { Photo } from "../../api/Pexels.types";
 import styles from "./PreviewDialog.module.css";
 
 interface PreviewDialogProps {
+  show: boolean;
   photo: Photo | null;
   onClose: () => void;
 }
 
-export function PreviewDialog({ photo, onClose }: PreviewDialogProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export function PreviewDialog({ photo, onClose, show }: PreviewDialogProps) {
   const ref = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    setIsOpen(!!photo);
-  }, [photo]);
-
-  useEffect(() => {
-    if (isOpen) {
+    if (show) {
       ref.current?.showModal();
     } else {
       ref.current?.close?.();
     }
-  }, [isOpen]);
+  }, [show]);
 
   function handleClose() {
-    setIsOpen(false);
     ref.current?.close?.();
     onClose();
-  }
-
-  if (!photo) {
-    return null;
   }
 
   return (
@@ -44,7 +35,9 @@ export function PreviewDialog({ photo, onClose }: PreviewDialogProps) {
           onClick={handleClose}
         />
       </div>
-      <img className={styles.image} src={photo.src.large2x} alt={photo.alt} />
+      {photo && (
+        <img className={styles.image} src={photo.src.large2x} alt={photo.alt} />
+      )}
     </dialog>
   );
 }
