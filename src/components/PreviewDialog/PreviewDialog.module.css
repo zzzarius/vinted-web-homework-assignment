@@ -6,6 +6,10 @@
   outline: none;
 }
 
+.previewDialog:modal {
+  display: flex;
+}
+
 .previewDialog::backdrop {
   backdrop-filter: blur(10px);
 }
