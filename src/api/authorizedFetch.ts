@@ -3,8 +3,17 @@ import { sleep } from "../utils.ts";
 export async function authorizedFetch<T>(
   input: RequestInfo | URL,
   init?: RequestInit,
-): Promise<{ data: T | null; errors: unknown[]; hasErrors: boolean }> {
+): Promise<{
+  data: T | null;
+  errors: unknown[];
+  hasErrors: boolean;
+}> {
   const errors: unknown[] = [];
+  if (!import.meta.env.VITE_PEXELS_API_KEY) {
+    errors.push(
+      "Environment variable VITE_PEXELS_API_KEY is not defined. Check your .env file.",
+    );
+  }
   try {
     const apiKey = import.meta.env.VITE_PEXELS_API_KEY;
     const headers = {
