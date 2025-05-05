@@ -139,3 +139,17 @@
     transform: scale(1);
   }
 }
+
+.image {
+  transition: filter 0.5s ease-in allow-discrete, opacity 0.5s ease-in
+    allow-discrete;
+  opacity: 0.01;
+  filter: blur(10px);
+}
+
+@starting-style {
+  .image {
+    opacity: 0;
+    filter: blur(10px);
+  }
+}

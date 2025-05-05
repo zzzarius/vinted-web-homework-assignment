@@ -6,7 +6,9 @@
   bottom: 0;
 }
 
-.btn {
+.btn,
+.downloadAll,
+.clear {
   border: none;
   cursor: pointer;
   background-color: transparent;
@@ -17,13 +19,11 @@
 }
 
 .downloadAll {
-  composes: btn;
   background-color: var(--color-text-light);
   color: var(--color-bg);
 }
 
 .clear {
-  composes: btn;
   border: 1px solid var(--color-text-light);
 }
 
@@ -32,7 +32,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: .5rem;
+  padding: .5rem 1rem;
   background-color: rgba(0, 0, 0, 0.5);
 }
 

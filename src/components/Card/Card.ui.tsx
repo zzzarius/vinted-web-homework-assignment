@@ -36,10 +36,15 @@ export function Card({
       <button className={styles.button} type="button" onClick={onPreviewClick}>
         <figure className={styles.figure}>
           <img
+            className={styles.image}
             src={photo.src.large}
             alt={photo.alt}
             fetchPriority="high"
             srcSet={`${photo.src.large2x} 2x`}
+            onLoad={({ currentTarget }) => {
+              currentTarget.style.filter = "blur(0)";
+              currentTarget.style.opacity = "1";
+            }}
           />
           {size === "large" && (
             <figcaption className={styles.figcaption}>
